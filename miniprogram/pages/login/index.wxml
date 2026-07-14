@@ -1,0 +1,63 @@
+<view class="login-container">
+  <view class="header-section">
+    <view class="logo-wrapper">
+      <view class="logo">P</view>
+    </view>
+    <text class="title">Phoenix</text>
+    <text class="subtitle">欢迎回来</text>
+  </view>
+
+  <view class="form-section">
+    <van-field
+      value="{{loginInfo}}"
+      label="账号"
+      placeholder="请输入账号/邮箱/手机号"
+      border="{{false}}"
+      class="field-item"
+      bind:input="onLoginInfoInput"
+    />
+
+    <van-field
+      value="{{password}}"
+      label="密码"
+      type="password"
+      placeholder="请输入密码"
+      border="{{false}}"
+      class="field-item"
+      bind:input="onPasswordInput"
+    />
+
+    <view class="link-row">
+      <text class="link" bindtap="goToRegister">注册账号</text>
+      <text class="link" bindtap="goToForgot">忘记密码</text>
+    </view>
+
+    <van-button
+      type="primary"
+      block
+      round
+      loading="{{loading}}"
+      bind:click="onLogin"
+      class="login-btn"
+    >
+      登录
+    </van-button>
+  </view>
+
+  <view class="divider-wrap">
+    <view class="divider-line"></view>
+    <text class="divider-text">其他登录方式</text>
+    <view class="divider-line"></view>
+  </view>
+
+  <view class="oauth-section">
+    <view class="oauth-item" bindtap="onWechatLogin">
+      <view class="oauth-icon wechat"></view>
+      <text class="oauth-text">微信</text>
+    </view>
+    <view class="oauth-item" bindtap="onQQLogin">
+      <view class="oauth-icon qq"></view>
+      <text class="oauth-text">QQ</text>
+    </view>
+  </view>
+</view>

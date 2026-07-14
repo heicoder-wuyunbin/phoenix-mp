@@ -1,0 +1,101 @@
+<view class="register-container">
+  <view class="header-section">
+    <view class="logo-wrapper">
+      <view class="logo">P</view>
+    </view>
+    <text class="title">Phoenix</text>
+    <text class="subtitle">创建新账号</text>
+  </view>
+
+  <view class="form-section">
+    <view class="reg-type-switch">
+      <text class="switch-item {{regType === 'email' ? 'active' : ''}}" bindtap="switchToEmail">邮箱注册</text>
+      <text class="switch-item {{regType === 'mobile' ? 'active' : ''}}" bindtap="switchToMobile">手机注册</text>
+    </view>
+
+    <van-field
+      value="{{username}}"
+      label="用户名"
+      placeholder="请输入用户名"
+      border="{{false}}"
+      class="field-item"
+      bind:input="onUsernameInput"
+    />
+
+    <van-field
+      value="{{password}}"
+      label="密码"
+      type="password"
+      placeholder="请输入密码"
+      border="{{false}}"
+      class="field-item"
+      bind:input="onPasswordInput"
+    />
+
+    <van-field
+      value="{{repassword}}"
+      label="确认密码"
+      type="password"
+      placeholder="请再次输入密码"
+      border="{{false}}"
+      class="field-item"
+      bind:input="onRepasswordInput"
+    />
+
+    <van-field
+      value="{{account}}"
+      label="{{regType === 'email' ? '邮箱' : '手机号'}}"
+      placeholder="{{regType === 'email' ? '请输入邮箱' : '请输入手机号'}}"
+      border="{{false}}"
+      class="field-item"
+      bind:input="onAccountInput"
+    />
+
+    <view class="form-item" wx:if="{{regType === 'mobile'}}">
+      <van-field
+        value="{{mobileCode}}"
+        label="验证码"
+        placeholder="请输入验证码"
+        border="{{false}}"
+        class="field-item-no-border"
+        bind:input="onMobileCodeInput"
+      >
+        <van-button
+          slot="button"
+          size="small"
+          type="primary"
+          round
+          loading="{{codeLoading}}"
+          disabled="{{countdown > 0}}"
+          bind:click="onGetMobileCode"
+          class="code-btn"
+        >
+          {{countdown > 0 ? countdown + 's' : '获取验证码'}}
+        </van-button>
+      </van-field>
+    </view>
+
+    <view class="form-item captcha-item">
+      <van-field
+        value="{{captcha}}"
+        label="图形验证码"
+        placeholder="请输入验证码"
+        border="{{false}}"
+        class="field-item-no-border"
+        bind:input="onCaptchaInput"
+      />
+      <image class="captcha-img" src="{{captchaUrl}}" mode="widthFix" bindtap="refreshCaptcha" />
+    </view>
+
+    <van-button
+      type="primary"
+      block
+      round
+      loading="{{loading}}"
+      bind:click="onRegister"
+      class="register-btn"
+    >
+      注册
+    </van-button>
+  </view>
+</view>

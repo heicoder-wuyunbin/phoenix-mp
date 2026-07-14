@@ -1,0 +1,115 @@
+<view class="page-container">
+  <view class="header">
+    <view class="header-content">
+      <view class="logo">P</view>
+      <van-search
+        value="{{searchValue}}"
+        placeholder="搜索商品"
+        background="#f7f8fa"
+        shape="round"
+        class="search-input"
+        bind:search="onSearch"
+      />
+    </view>
+  </view>
+
+  <scroll-view class="scroll-area" scroll-y enhanced>
+    <view class="banner-section">
+      <swiper
+        indicator-dots="{{true}}"
+        autoplay="{{true}}"
+        circular="{{true}}"
+        indicator-color="rgba(255,255,255,0.5)"
+        indicator-active-color="#ffffff"
+      >
+        <swiper-item wx:for="{{bannerList}}" wx:key="id">
+          <image src="{{item.image}}" mode="aspectFill" class="banner-image" />
+        </swiper-item>
+      </swiper>
+    </view>
+
+    <view class="menu-section">
+      <van-grid column-num="4" border="{{false}}" class="menu-grid">
+        <van-grid-item
+          wx:for="{{menuList}}"
+          wx:key="id"
+          icon="{{item.icon}}"
+          text="{{item.name}}"
+          icon-color="{{item.color}}"
+          bind:click="onMenuClick"
+          data-id="{{item.id}}"
+        />
+      </van-grid>
+    </view>
+
+    <view class="ad-banner">
+      <image src="{{topAdImage}}" mode="widthFix" class="ad-image" />
+    </view>
+
+    <view class="product-section">
+      <view class="section-header">
+        <van-icon name="paperclip" color="#ee0a24" size="24" />
+        <text class="section-title">商品推荐</text>
+      </view>
+      <view class="product-grid">
+        <van-card
+          wx:for="{{productList}}"
+          wx:key="id"
+          price="{{item.price}}"
+          title="{{item.name}}"
+          thumb="{{item.image}}"
+          class="product-card"
+          bind:click="onProductClick"
+          data-id="{{item.id}}"
+        />
+      </view>
+    </view>
+
+    <view class="ad-banner">
+      <image src="{{middleAdImage}}" mode="widthFix" class="ad-image" />
+    </view>
+
+    <view class="category-section">
+      <view class="section-header">
+        <van-icon name="grid" color="#ee0a24" size="24" />
+        <text class="section-title">畅销商品分类</text>
+      </view>
+      <van-cell-group inset>
+        <van-cell
+          wx:for="{{categoryList}}"
+          wx:key="id"
+          title="{{item.name}}"
+          is-link
+          bind:click="onCategoryClick"
+          data-id="{{item.id}}"
+        />
+      </van-cell-group>
+    </view>
+
+    <view class="service-section">
+      <view class="service-item">
+        <van-icon name="truck" color="#ee0a24" size="48" />
+        <view class="service-info">
+          <text class="service-title">免费送货与退货</text>
+          <text class="service-desc">所有订单超过200免费送货</text>
+        </view>
+      </view>
+      <view class="service-item">
+        <van-icon name="certificate" color="#ff4d4f" size="48" />
+        <view class="service-info">
+          <text class="service-title">退款保证</text>
+          <text class="service-desc">100%退款保证</text>
+        </view>
+      </view>
+      <view class="service-item">
+        <van-icon name="phone" color="#ee0a24" size="48" />
+        <view class="service-info">
+          <text class="service-title">在线支持 24/7</text>
+          <text class="service-desc">客服7*24小时在线</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="footer-space"></view>
+  </scroll-view>
+</view>
