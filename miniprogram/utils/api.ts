@@ -83,4 +83,18 @@ export const api = {
 
   logout: () =>
     request('/api/user/logout', 'POST'),
+
+  getCategoryList: () =>
+    request<{ id: number; name: string; parentId: number; sortOrder: number }[]>('/api/category/list'),
+
+  getGoodsList: (categoryId: number, pageNum: number, pageSize: number) =>
+    request<{
+      records: { id: number; name: string; image: string; price: number; categoryName: string; sales: number; stock: number }[];
+      total: number;
+      size: number;
+      current: number;
+      pages: number;
+      hasNextPage: boolean;
+      hasPreviousPage: boolean;
+    }>('/api/goods/list', 'GET', { categoryId, pageNum, pageSize }),
 };

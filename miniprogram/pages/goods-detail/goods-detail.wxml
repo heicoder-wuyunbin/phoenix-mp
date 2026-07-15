@@ -1,0 +1,31 @@
+<view class="container">
+  <view wx:if="{{loading}}" class="loading">
+    <text>加载中...</text>
+  </view>
+
+  <view wx:else class="goods-detail">
+    <swiper class="goods-swiper" indicator-dots autoplay circular>
+      <swiper-item wx:if="{{goodsInfo.images && goodsInfo.images.length > 0}}">
+        <image wx:for="{{goodsInfo.images}}" wx:key="index" src="{{item}}" mode="aspectFill" class="goods-image"/>
+      </swiper-item>
+      <swiper-item wx:else>
+        <image src="{{goodsInfo.image}}" mode="aspectFill" class="goods-image"/>
+      </swiper-item>
+    </swiper>
+
+    <view class="goods-info">
+      <text class="goods-name">{{goodsInfo.name}}</text>
+      <view class="price-row">
+        <text class="goods-price">¥{{goodsInfo.price}}</text>
+        <text class="goods-sales">销量 {{goodsInfo.sales}}</text>
+      </view>
+      <text class="goods-category">分类：{{goodsInfo.categoryName}}</text>
+      <text class="goods-stock">库存：{{goodsInfo.stock}}</text>
+    </view>
+
+    <view class="goods-desc" wx:if="{{goodsInfo.description}}">
+      <text class="section-title">商品描述</text>
+      <text class="desc-content">{{goodsInfo.description}}</text>
+    </view>
+  </view>
+</view>
