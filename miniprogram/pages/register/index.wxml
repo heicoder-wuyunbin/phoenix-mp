@@ -98,4 +98,35 @@
       注册
     </van-button>
   </view>
+
+  <!-- 邮箱注册成功页 -->
+  <view class="email-success-overlay {{showEmailSuccess ? 'show' : ''}}">
+    <view class="email-success-card">
+      <view class="success-icon">✓</view>
+      <text class="success-title">注册成功</text>
+      <text class="success-desc">验证邮件已发送至 {{account}}</text>
+      <text class="success-hint">请登录邮箱查看并点击验证链接完成激活</text>
+      <view class="success-actions">
+        <van-button
+          type="primary"
+          block
+          round
+          loading="{{sendingMail}}"
+          bind:click="onResendMail"
+          class="action-btn"
+        >
+          重新发送邮件
+        </van-button>
+        <van-button
+          block
+          round
+          plain
+          bind:click="onGoToLogin"
+          class="action-btn"
+        >
+          返回登录
+        </van-button>
+      </view>
+    </view>
+  </view>
 </view>

@@ -23,6 +23,8 @@ Page({
     loading: false,
     codeLoading: false,
     countdown: 0,
+    showEmailSuccess: false,
+    sendingMail: false,
   },
 
   onLoad() {
@@ -156,19 +158,35 @@ Page({
       });
 
       if (regType === 'email') {
-        wx.showToast({ title: '注册成功，请查收激活邮件', icon: 'success' });
+        this.setData({ showEmailSuccess: true });
       } else {
         wx.showToast({ title: '注册成功', icon: 'success' });
+        setTimeout(() => {
+          wx.navigateBack();
+        }, 2000);
       }
-
-      setTimeout(() => {
-        wx.navigateBack();
-      }, 2000);
     } catch (err) {
       console.error('注册失败:', err);
       this.refreshCaptcha();
     } finally {
       this.setData({ loading: false });
     }
+  },
+
+  async onResendMail() {
+    const { account } = this.data;
+    this.setData({ sendingMail: true });
+    try {
+      await api.sendCheckMail(account);
+      wx.showToast({ title: '验证邮件已重新发送', icon: 'success' });
+    } catch (err) {
+      console.error('重发邮件失败:', err);
+    } finally {
+      this.setData({ sendingMail: false });
+    }
+  },
+
+  onGoToLogin() {
+    wx.navigateBack();
   },
 });

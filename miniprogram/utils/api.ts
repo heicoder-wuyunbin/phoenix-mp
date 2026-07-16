@@ -78,6 +78,9 @@ export const api = {
     return `${BASE_URL}${url}`;
   },
 
+  sendCheckMail: (email: string) =>
+    request('/api/user/send-check-mail', 'POST', { email }),
+
   checkMail: (code: string) =>
     request('/api/user/check-mail', 'GET', { code }),
 
