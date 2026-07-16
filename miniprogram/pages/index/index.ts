@@ -1,4 +1,4 @@
-import { api } from '../../utils/api'
+import { api, resolveImageUrl } from '../../utils/api'
 
 Component({
   data: {
@@ -33,10 +33,14 @@ Component({
       const { currentCategory, pageNum, pageSize } = this.data;
       api.getGoodsList(currentCategory, pageNum, pageSize).then((res) => {
         const data = res.data;
-        const newList = pageNum === 1 ? data.records : [...this.data.goodsList, ...data.records];
+        const records = (data.records || []).map((item: any) => ({
+          ...item,
+          image: resolveImageUrl(item.image)
+        }));
+        const newList = pageNum === 1 ? records : [...this.data.goodsList, ...records];
         this.setData({
           goodsList: newList,
-          hasMore: data.hasNextPage,
+          hasMore: data.current < data.pages,
           refreshing: false
         });
       }).catch(() => {

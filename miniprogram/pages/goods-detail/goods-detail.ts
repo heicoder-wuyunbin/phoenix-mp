@@ -1,4 +1,4 @@
-import { api } from '../../utils/api';
+import { api, resolveImageUrl } from '../../utils/api';
 
 Page({
   data: {
@@ -24,6 +24,9 @@ Page({
   loadGoodsDetail(goodsId: number) {
     api.getGoodsDetail(goodsId).then((res) => {
       const data = res.data;
+      // 处理图片 URL
+      if (data.image) data.image = resolveImageUrl(data.image);
+      if (data.images) data.images = data.images.map((url: string) => resolveImageUrl(url));
       const specTree = data.specTree || [];
       const skuList = data.skuList || [];
 

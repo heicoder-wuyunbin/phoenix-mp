@@ -1,5 +1,12 @@
 const BASE_URL = 'http://localhost:8080';
 
+/** 将相对路径的图片 URL 转为绝对地址 */
+export function resolveImageUrl(url: string): string {
+  if (!url) return '';
+  if (url.startsWith('http://') || url.startsWith('https://')) return url;
+  return `${BASE_URL}${url}`;
+}
+
 interface ApiResponse<T = any> {
   code: number;
   message: string;
@@ -88,7 +95,7 @@ export const api = {
     request('/api/user/logout', 'POST'),
 
   getCategoryList: () =>
-    request<{ id: number; name: string; parentId: number; sortOrder: number }[]>('/api/category/list'),
+    request<{ id: number; name: string; parentId: number; sort: number }[]>('/api/category/list'),
 
   getGoodsList: (categoryId: number, pageNum: number, pageSize: number) =>
     request<{
@@ -97,8 +104,6 @@ export const api = {
       size: number;
       current: number;
       pages: number;
-      hasNextPage: boolean;
-      hasPreviousPage: boolean;
     }>('/api/goods/list', 'GET', { categoryId, pageNum, pageSize }),
 
   getGoodsDetail: (id: number) =>
