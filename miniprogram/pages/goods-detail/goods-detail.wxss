@@ -1,6 +1,7 @@
 .container {
   padding: 0;
   background: #f5f5f5;
+  padding-bottom: 120rpx;
 }
 
 .loading {
@@ -61,9 +62,11 @@
   margin-bottom: 10rpx;
 }
 
-.goods-desc {
+/* 规格选择 */
+.spec-section {
   background: #fff;
   padding: 30rpx;
+  margin-bottom: 20rpx;
 }
 
 .section-title {
@@ -74,8 +77,107 @@
   margin-bottom: 20rpx;
 }
 
+.spec-item {
+  margin-bottom: 20rpx;
+}
+
+.spec-name {
+  font-size: 28rpx;
+  color: #666;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.spec-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.spec-option {
+  padding: 12rpx 28rpx;
+  border: 2rpx solid #d9d9d9;
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  color: #333;
+  background: #fff;
+}
+
+.spec-option.selected {
+  border-color: #ff4d4f;
+  color: #ff4d4f;
+  background: #fff1f0;
+}
+
+/* 商品描述 */
+.goods-desc {
+  background: #fff;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
 .desc-content {
   font-size: 28rpx;
   color: #666;
   line-height: 1.6;
+}
+
+/* 底部操作栏 */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-top: 1rpx solid #eee;
+  height: 100rpx;
+  padding: 0 20rpx;
+}
+
+.footer-left {
+  display: flex;
+  flex: 1;
+  justify-content: space-around;
+}
+
+.footer-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 22rpx;
+  color: #666;
+}
+
+.footer-right {
+  display: flex;
+  flex: 2;
+  gap: 16rpx;
+}
+
+.btn-cart {
+  flex: 1;
+  height: 70rpx;
+  line-height: 70rpx;
+  background: #ff9c00;
+  color: #fff;
+  border-radius: 36rpx;
+  font-size: 28rpx;
+  text-align: center;
+  border: none;
+  padding: 0;
+}
+
+.btn-buy {
+  flex: 1;
+  height: 70rpx;
+  line-height: 70rpx;
+  background: #ff4d4f;
+  color: #fff;
+  border-radius: 36rpx;
+  font-size: 28rpx;
+  text-align: center;
+  border: none;
+  padding: 0;
 }

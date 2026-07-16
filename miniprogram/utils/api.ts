@@ -67,7 +67,7 @@ export const api = {
   login: (data: { loginInfo: string; password: string }) =>
     request<{ token: string; userId: number; username: string; headIco: string; groupId: number; exp: number }>('/api/user/login', 'POST', data),
 
-  register: (data: { username: string; password: string; repassword: string; email?: string; mobile?: string; mobileCode?: string; captchaKey: string; captcha: string }) =>
+  register: (data: { regType: string; username: string; password: string; repassword: string; email?: string; mobile?: string; mobileCode?: string; captchaKey: string; captcha: string }) =>
     request('/api/user/register', 'POST', data),
 
   sendMobileCode: (mobile: string, captchaKey: string, captcha: string) =>
@@ -97,4 +97,45 @@ export const api = {
       hasNextPage: boolean;
       hasPreviousPage: boolean;
     }>('/api/goods/list', 'GET', { categoryId, pageNum, pageSize }),
+
+  getGoodsDetail: (id: number) =>
+    request<{
+      id: number;
+      name: string;
+      image: string;
+      images: string[];
+      price: number;
+      marketPrice: number;
+      stock: number;
+      sales: number;
+      categoryName: string;
+      description: string;
+      content: string;
+      hasSpec: boolean;
+      specTree: { name: string; options: string[] }[];
+      skuList: { id: number; spec: Record<string, string>; price: number; stock: number; image: string }[];
+    }>('/api/goods/detail', 'GET', { id }),
+
+  addToCart: (skuId: number, quantity: number) =>
+    request('/api/cart/add', 'POST', { skuId, quantity }),
+
+  getCartList: () =>
+    request<{
+      skuId: number;
+      name: string;
+      image: string;
+      specText: string;
+      price: number;
+      quantity: number;
+      stock: number;
+    }[]>('/api/cart/list'),
+
+  updateCart: (skuId: number, quantity: number) =>
+    request('/api/cart/update', 'PUT', { skuId, quantity }),
+
+  removeFromCart: (skuId: number) =>
+    request('/api/cart/remove', 'DELETE', { skuId }),
+
+  clearCart: () =>
+    request('/api/cart/clear', 'DELETE'),
 };

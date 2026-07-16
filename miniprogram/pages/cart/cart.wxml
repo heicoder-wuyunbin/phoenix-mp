@@ -1,0 +1,103 @@
+<view class="cart-container">
+  <!-- 加载状态 -->
+  <view wx:if="{{loading}}" class="loading">
+    <text>加载中...</text>
+  </view>
+
+  <!-- 空购物车 -->
+  <view wx:elif="{{isEmpty}}" class="empty-cart">
+    <view class="empty-icon">
+      <text class="icon-cart">🛒</text>
+    </view>
+    <text class="empty-text">购物车还是空的</text>
+    <view class="go-shopping-btn" bindtap="goShopping">
+      <text>去逛逛</text>
+    </view>
+  </view>
+
+  <!-- 购物车列表 -->
+  <view wx:else class="cart-content">
+    <scroll-view class="cart-scroll" scroll-y>
+      <view class="cart-list">
+        <view
+          class="cart-item"
+          wx:for="{{cartItems}}"
+          wx:key="skuId"
+        >
+          <view
+            class="select-checkbox {{selectedSkuIds.indexOf(item.skuId) !== -1 ? 'checked' : ''}}"
+            bindtap="toggleSelect"
+            data-sku-id="{{item.skuId}}"
+          ></view>
+
+          <image
+            class="item-image"
+            src="{{item.image}}"
+            mode="aspectFill"
+          />
+
+          <view class="item-info">
+            <text class="item-name">{{item.name}}</text>
+            <text class="item-spec" wx:if="{{item.specText}}">{{item.specText}}</text>
+            <text class="item-price">¥{{item.price}}</text>
+
+            <view class="qty-control">
+              <view
+                class="qty-btn"
+                bindtap="decreaseQty"
+                data-sku-id="{{item.skuId}}"
+              >
+                <text>-</text>
+              </view>
+              <text class="qty-value">{{item.quantity}}</text>
+              <view
+                class="qty-btn"
+                bindtap="increaseQty"
+                data-sku-id="{{item.skuId}}"
+              >
+                <text>+</text>
+              </view>
+            </view>
+          </view>
+
+          <view
+            class="delete-btn"
+            bindtap="onRemoveItem"
+            data-sku-id="{{item.skuId}}"
+          >
+            <text>删除</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+
+    <!-- 底部操作栏 -->
+    <view class="cart-footer">
+      <view
+        class="select-all {{allSelected ? 'checked' : ''}}"
+        bindtap="toggleSelectAll"
+      >
+        <text>全选</text>
+      </view>
+
+      <view class="footer-summary">
+        <text class="total-label">合计：</text>
+        <text class="total-price">¥{{totalPrice}}</text>
+      </view>
+
+      <view
+        class="checkout-btn {{selectedSkuIds.length === 0 ? 'disabled' : ''}}"
+        bindtap="checkout"
+      >
+        <text>结算({{totalCount}})</text>
+      </view>
+
+      <view
+        class="clear-btn"
+        bindtap="clearCart"
+      >
+        <text>清空</text>
+      </view>
+    </view>
+  </view>
+</view>

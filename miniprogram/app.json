@@ -5,7 +5,8 @@
     "pages/register/index",
     "pages/my/index",
     "pages/logs/logs",
-    "pages/goods-detail/goods-detail"
+    "pages/goods-detail/goods-detail",
+    "pages/cart/cart"
   ],
   "window": {
     "navigationBarTextStyle": "black",

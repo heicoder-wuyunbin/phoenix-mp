@@ -144,6 +144,7 @@ Page({
     this.setData({ loading: true });
     try {
       await api.register({
+        regType,
         username,
         password,
         repassword,
